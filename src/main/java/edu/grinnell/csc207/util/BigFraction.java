@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * A simple implementation of arbitrary-precision Fractions.
  *
  * @author Samuel A. Rebelsky
- * @author YOUR NAME HERE
+ * @author Nicky Moreno Gonzalez & Drew Fargo
  */
 public class BigFraction {
   // +------------------+---------------------------------------------
@@ -28,10 +28,10 @@ public class BigFraction {
   // +-----------+
 
   /** The default numerator when creating fractions. */
-  private static final BigInteger DEFAULT_NUMERATOR = BigInteger.valueOf(2);
+  //private static final BigInteger DEFAULT_NUMERATOR = BigInteger.valueOf(2);
 
   /** The default denominator when creating fractions. */
-  private static final BigInteger DEFAULT_DENOMINATOR = BigInteger.valueOf(7);
+  //private static final BigInteger DEFAULT_DENOMINATOR = BigInteger.valueOf(7);
 
   // +--------+-------------------------------------------------------
   // | Fields |
@@ -86,9 +86,14 @@ public class BigFraction {
    *   The fraction in string form
    */
   public BigFraction(String str) {
-    this.num = DEFAULT_NUMERATOR;
-    this.denom = DEFAULT_DENOMINATOR;
+    int slashIndex = str.indexOf('/');
+    String numString = str.substring(0, slashIndex);
+    String denomString = str.substring(slashIndex + 1);
+    this.num = new BigInteger(numString);
+    this.denom = new BigInteger(denomString);
   } // BigFraction
+
+  
 
   // +---------+------------------------------------------------------
   // | Methods |
@@ -160,4 +165,27 @@ public class BigFraction {
     // return this.num.toString().concat("/").concat(this.denom.toString());
     return this.num + "/" + this.denom;
   } // toString()
+
+  /**
+   * Multiply two BigFractions, yielding anothr BigFraction
+   * 
+   * @param multiple
+   * @return A new BigFraction
+   */
+  public BigFraction multiply(BigFraction multiple) {
+    return new BigFraction(this.num.multiply(multiple.num), this.denom.multiply(multiple.denom));
+  } // multiply
+
+  
+  /**
+   * Get the fractional remainder of the BigFraction.
+   * 
+   * @return If the BigFraction is represented a/b, we return (a mod b)/b.
+   */
+  public BigFraction fractional() {
+    return new BigFraction(this.num.mod(this.denom), this.denom);
+  } // fractional
+
+
+
 } // class BigFraction

@@ -8,7 +8,7 @@ import java.io.PrintWriter;
  * A simple experiment using fractions.
  *
  * @author Samuel A. Rebelsky.
- * @author YOUR NAME HERE
+ * @author Nicky Moreno Gonzalez & Drew Fargo
  */
 public class BFExperiment {
   /**
